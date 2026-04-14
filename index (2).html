@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahul Properties — Hyderabad Real Estate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --o: #ff5c00;
+  --o2: #ff8040;
+  --dark: #080808;
+  --d2: #101010;
+  --d3: #181818;
+  --text: #f4efe9;
+  --muted: rgba(244,239,233,0.42);
+  --border: rgba(255,92,0,0.15);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { overflow-x: hidden; scroll-behavior: smooth; }
+body { background: var(--dark); color: var(--text); font-family: 'Outfit', sans-serif; font-weight: 300; overflow-x: hidden; }
+#cv { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+#ldr { position: fixed; inset: 0; background: var(--dark); z-index: 9000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+#ldr-n { font-family: 'Syne', sans-serif; font-size: clamp(5rem,15vw,11rem); font-weight: 800; color: var(--o); line-height: 1; letter-spacing: -4px; }
+#ldr-bar { width: 220px; height: 2px; background: rgba(255,92,0,0.2); border-radius: 2px; overflow: hidden; }
+#ldr-fill { height: 100%; width: 0%; background: var(--o); border-radius: 2px; }
+#ldr-txt { font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase; color: var(--muted); }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; padding: 1.6rem 3rem; display: flex; justify-content: space-between; align-items: center; transition: background 0.4s, border-bottom 0.4s; }
+nav.scrolled { background: rgba(8,8,8,0.93); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: var(--o); text-decoration: none; }
+.nav-right { display: flex; align-items: center; gap: 2.5rem; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+.nav-links a:hover { color: var(--o); }
+.nav-wa { font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; background: var(--o); color: #000; padding: 0.55rem 1.3rem; text-decoration: none; border-radius: 100px; font-weight: 500; transition: background 0.3s; }
+.nav-wa:hover { background: var(--o2); }
+.hero { position: relative; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; z-index: 1; overflow: hidden; }
+.hero-left { display: flex; flex-direction: column; justify-content: center; padding: 9rem 3rem 4rem 3rem; }
+.h-tag { display: flex; align-items: center; gap: 0.8rem; font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; color: var(--o); margin-bottom: 2.5rem; }
+.h-dot { width: 6px; height: 6px; background: var(--o); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+.hero-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3.2rem,5.5vw,5.2rem); line-height: 0.93; letter-spacing: -2px; margin-bottom: 2rem; }
+.hero-title .ln { display: block; overflow: hidden; }
+.hero-title .wd { display: inline-block; }
+.hero-title .ac { color: var(--o); }
+.hero-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.9; max-width: 380px; margin-bottom: 3rem; }
+.hero-btns { display: flex; flex-direction: column; gap: 0.9rem; width: fit-content; }
+.btn-wa { display: inline-flex; align-items: center; gap: 0.9rem; padding: 1rem 2rem; background: var(--o); color: #000; font-family: 'Outfit', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; text-decoration: none; border-radius: 6px; transition: background 0.3s, transform 0.2s; }
+.btn-wa:hover { background: var(--o2); transform: translateY(-2px); }
+.btn-call { display: inline-flex; align-items: center; gap: 0.9rem; padding: 1rem 2rem; background: transparent; color: var(--text); font-family: 'Outfit', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: 1px solid var(--border); border-radius: 6px; transition: border-color 0.3s, color 0.3s, transform 0.2s; }
+.btn-call:hover { border-color: var(--o); color: var(--o); transform: translateY(-2px); }
+.hero-right { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background: var(--d2); border-left: 1px solid var(--border); }
+.orb-wrap { position: relative; width: 280px; height: 280px; }
+.orb { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(ellipse at 40% 40%, rgba(255,92,0,0.22) 0%, transparent 70%); animation: morph 8s ease-in-out infinite; }
+.orb2 { position: absolute; inset: 20px; background: radial-gradient(ellipse at 60% 60%, rgba(255,128,64,0.14) 0%, transparent 70%); border-radius: 50%; animation: morph 11s ease-in-out infinite reverse; }
+@keyframes morph { 0%,100%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%} 25%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%} 50%{border-radius:50% 50% 20% 80% / 25% 80% 20% 75%} 75%{border-radius:70% 30% 50% 50% / 30% 30% 70% 70%} }
+.orb-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 5rem; font-weight: 800; color: rgba(255,92,0,0.1); letter-spacing: 4px; }
+.hero-stats { position: absolute; bottom: 0; left: 0; right: 0; display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--border); }
+.hst { padding: 1.4rem; border-right: 1px solid var(--border); }
+.hst:last-child { border-right: none; }
+.hst-n { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--o); display: block; line-height: 1; }
+.hst-l { font-size: 0.58rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; display: block; }
+.mq { position: relative; z-index: 1; overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 0.9rem 0; }
+.mq-track { display: flex; width: max-content; animation: ticker 20s linear infinite; }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.mi { display: flex; align-items: center; gap: 1rem; padding: 0 1.5rem; font-size: 0.58rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.md { width: 4px; height: 4px; border-radius: 50%; background: var(--o); flex-shrink: 0; }
+.services { position: relative; z-index: 1; padding: 5rem 3rem; max-width: 1200px; margin: 0 auto; }
+.sec-eye { font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; color: var(--o); margin-bottom: 0.5rem; }
+.sec-ttl { font-family: 'Syne', sans-serif; font-size: clamp(2rem,5vw,3.5rem); font-weight: 800; letter-spacing: -1px; line-height: 1; margin-bottom: 3rem; }
+.sec-ttl span { color: var(--o); }
+.svc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); }
+.svc { background: var(--d2); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: background 0.4s; }
+.svc::after { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 2px; background: var(--o); transition: width 0.5s ease; }
+.svc:hover { background: var(--d3); }
+.svc:hover::after { width: 100%; }
+.svc-num { font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800; color: rgba(255,92,0,0.07); line-height: 1; margin-bottom: 1.2rem; transition: color 0.4s; }
+.svc:hover .svc-num { color: rgba(255,92,0,0.15); }
+.svc-ico { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
+.svc-name { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.svc-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
+.agent { position: relative; z-index: 1; }
+.agent-grid { display: grid; grid-template-columns: 1.1fr 1fr; }
+.agent-l { background: var(--o); padding: 5rem 3rem; position: relative; overflow: hidden; }
+.agent-l::before { content: 'RP'; position: absolute; right: -1rem; bottom: -2rem; font-family: 'Syne', sans-serif; font-size: 14rem; font-weight: 800; color: rgba(0,0,0,0.07); line-height: 1; pointer-events: none; }
+.ag-tag { font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(0,0,0,0.5); margin-bottom: 1rem; }
+.ag-name { font-family: 'Syne', sans-serif; font-size: clamp(2.8rem,5vw,4.5rem); font-weight: 800; color: #000; letter-spacing: -2px; line-height: 0.9; margin-bottom: 1.5rem; }
+.ag-bio { font-size: 0.86rem; color: rgba(0,0,0,0.6); line-height: 1.8; max-width: 420px; margin-bottom: 2.5rem; border-left: 2px solid rgba(0,0,0,0.2); padding-left: 1.2rem; }
+.ag-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-blk { display: inline-flex; align-items: center; gap: 0.8rem; padding: 0.95rem 2rem; background: #000; color: var(--o); font-family: 'Outfit', sans-serif; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; text-decoration: none; border-radius: 6px; transition: background 0.3s; }
+.btn-blk:hover { background: #1a1a1a; }
+.btn-blk-ghost { display: inline-flex; align-items: center; gap: 0.8rem; padding: 0.95rem 2rem; background: transparent; color: #000; font-family: 'Outfit', sans-serif; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(0,0,0,0.3); border-radius: 6px; transition: background 0.3s; }
+.btn-blk-ghost:hover { background: rgba(0,0,0,0.08); }
+.agent-r { background: var(--d2); padding: 5rem 3rem; border-left: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+.info-row { padding: 1.4rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 2rem; }
+.info-row:first-child { border-top: 1px solid var(--border); }
+.info-k { font-size: 0.58rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--o); min-width: 80px; padding-top: 2px; }
+.info-v { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+.rera { margin-top: 2rem; display: inline-flex; align-items: center; gap: 0.8rem; border: 1px solid var(--border); padding: 0.8rem 1.2rem; border-radius: 6px; }
+.rera-dot { width: 7px; height: 7px; background: var(--o); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+.rera-txt { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--o); }
+.contact { position: relative; z-index: 1; padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.ct-title { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem,6vw,5rem); font-weight: 800; letter-spacing: -2px; line-height: 0.92; margin-bottom: 1.5rem; }
+.ct-title span { color: var(--o); }
+.ct-sub { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+.ct-cards { display: flex; flex-direction: column; gap: 1rem; }
+.ct-card { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; position: relative; overflow: hidden; transition: border-color 0.4s; }
+.ct-card::before { content: ''; position: absolute; inset: 0; background: var(--o); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); z-index: 0; }
+.ct-card:hover { border-color: var(--o); }
+.ct-card:hover::before { transform: scaleX(1); }
+.ct-card:hover .ct-lbl, .ct-card:hover .ct-val, .ct-card:hover .ct-arr { color: #000; }
+.ct-info { position: relative; z-index: 1; }
+.ct-lbl { font-size: 0.58rem; letter-spacing: 3px; text-transform: uppercase; color: var(--o); display: block; margin-bottom: 0.3rem; transition: color 0.4s; }
+.ct-val { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); transition: color 0.4s; }
+.ct-arr { color: var(--o); font-size: 1.3rem; position: relative; z-index: 1; transition: color 0.4s, transform 0.3s; }
+.ct-card:hover .ct-arr { transform: translateX(4px); }
+footer { position: relative; z-index: 1; padding: 2rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.foot-logo { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 800; letter-spacing: 3px; color: var(--o); }
+footer p { font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+@media (max-width: 900px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 7rem 1.5rem 3rem; }
+  .hero-right { display: none; }
+  .services { padding: 3rem 1.5rem; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .agent-grid { grid-template-columns: 1fr; }
+  .contact { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+  footer { flex-direction: column; gap: 1rem; padding: 1.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="cv"></canvas>
+
+<div id="ldr">
+  <div id="ldr-n">0</div>
+  <div id="ldr-bar"><div id="ldr-fill"></div></div>
+  <div id="ldr-txt">Loading Experience</div>
+</div>
+
+<nav id="nav" style="opacity:0">
+  <a href="#" class="nav-logo">Rahul Properties</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#agent">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://wa.me/916301059906?text=Hi%20Rahul,%20I%20am%20interested%20in%20your%20properties" class="nav-wa">WhatsApp</a>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="h-tag" id="htag" style="opacity:0">
+      <span class="h-dot"></span>
+      Premium Real Estate · Hyderabad
+    </div>
+    <h1 class="hero-title">
+      <span class="ln"><span class="wd" id="w1" style="transform:translateY(110%)">Hyderabad's</span></span>
+      <span class="ln"><span class="wd ac" id="w2" style="transform:translateY(110%)">Finest</span></span>
+      <span class="ln"><span class="wd" id="w3" style="transform:translateY(110%)">Properties</span></span>
+    </h1>
+    <p class="hero-desc" id="hdesc" style="opacity:0">Connecting buyers and investors with premium residential and commercial spaces. Trusted by 500+ families since 2016.</p>
+    <div class="hero-btns" id="hbtns" style="opacity:0">
+      <a href="https://wa.me/916301059906?text=Hi%20Rahul,%20I%20am%20interested%20in%20your%20properties" class="btn-wa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.17 1.533 5.943L.057 23.61a.5.5 0 0 0 .611.611l5.667-1.476A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.716-.506-5.282-1.388l-.38-.22-3.922 1.022 1.022-3.801-.242-.393A9.951 9.951 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        WhatsApp Now
+      </a>
+      <a href="tel:+916301059906" class="btn-call">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        Call: 6301059906
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="orb-wrap">
+      <div class="orb"></div>
+      <div class="orb2"></div>
+      <div class="orb-text">RP</div>
+    </div>
+    <div class="hero-stats">
+      <div class="hst"><span class="hst-n" data-v="200">0</span><span class="hst-l">Properties</span></div>
+      <div class="hst"><span class="hst-n" data-v="8">0</span><span class="hst-l">Yrs Exp</span></div>
+      <div class="hst"><span class="hst-n" data-v="500">0</span><span class="hst-l">Clients</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="mq">
+  <div class="mq-track">
+    <div class="mi"><span class="md"></span>Gachibowli</div>
+    <div class="mi"><span class="md"></span>HITEC City</div>
+    <div class="mi"><span class="md"></span>Banjara Hills</div>
+    <div class="mi"><span class="md"></span>Jubilee Hills</div>
+    <div class="mi"><span class="md"></span>Kondapur</div>
+    <div class="mi"><span class="md"></span>Madhapur</div>
+    <div class="mi"><span class="md"></span>Financial District</div>
+    <div class="mi"><span class="md"></span>Manikonda</div>
+    <div class="mi"><span class="md"></span>Gachibowli</div>
+    <div class="mi"><span class="md"></span>HITEC City</div>
+    <div class="mi"><span class="md"></span>Banjara Hills</div>
+    <div class="mi"><span class="md"></span>Jubilee Hills</div>
+    <div class="mi"><span class="md"></span>Kondapur</div>
+    <div class="mi"><span class="md"></span>Madhapur</div>
+    <div class="mi"><span class="md"></span>Financial District</div>
+    <div class="mi"><span class="md"></span>Manikonda</div>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <p class="sec-eye">What We Offer</p>
+  <h2 class="sec-ttl">Our <span>Services</span></h2>
+  <div class="svc-grid">
+    <div class="svc"><div class="svc-num">01</div><span class="svc-ico">🏠</span><div class="svc-name">Residential</div><div class="svc-desc">Flats, apartments and villas across Hyderabad's prime locations. 2BHK to luxury penthouse.</div></div>
+    <div class="svc"><div class="svc-num">02</div><span class="svc-ico">🏢</span><div class="svc-name">Commercial</div><div class="svc-desc">Office spaces, shops and warehouses in HITEC City, Financial District and more.</div></div>
+    <div class="svc"><div class="svc-num">03</div><span class="svc-ico">📋</span><div class="svc-name">Consultation</div><div class="svc-desc">Free property advice. Market analysis, legal guidance and investment planning with zero hidden fees.</div></div>
+  </div>
+</section>
+
+<section class="agent" id="agent">
+  <div class="agent-grid">
+    <div class="agent-l">
+      <p class="ag-tag">Your Trusted Partner</p>
+      <h2 class="ag-name">Rahul<br>Prasad</h2>
+      <p class="ag-bio">8+ years navigating Hyderabad's property market. Honest advice, zero hidden charges, and fast closings. I work for you — not commissions.</p>
+      <div class="ag-btns">
+        <a href="https://wa.me/916301059906?text=Hi%20Rahul,%20I%20want%20to%20discuss%20a%20property" class="btn-blk">WhatsApp Me</a>
+        <a href="tel:+916301059906" class="btn-blk-ghost">Call Now</a>
+      </div>
+    </div>
+    <div class="agent-r">
+      <div class="info-row"><span class="info-k">Speciality</span><span class="info-v">Residential & Commercial Properties</span></div>
+      <div class="info-row"><span class="info-k">Areas</span><span class="info-v">Gachibowli · HITEC City · Banjara Hills</span></div>
+      <div class="info-row"><span class="info-k">Languages</span><span class="info-v">Telugu · Hindi · English</span></div>
+      <div class="info-row"><span class="info-k">Response</span><span class="info-v">Within 15 minutes guaranteed</span></div>
+      <div class="rera"><span class="rera-dot"></span><span class="rera-txt">RERA Certified · AP2024001</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div>
+    <h2 class="ct-title">Let's Find Your <span>Space</span></h2>
+    <p class="ct-sub">Ready to buy, sell or invest? Contact Rahul directly — no forms, no delays, just a real conversation.</p>
+  </div>
+  <div class="ct-cards">
+    <a href="https://wa.me/916301059906?text=Hi%20Rahul,%20I%20want%20to%20enquire%20about%20a%20property" class="ct-card">
+      <div class="ct-info"><span class="ct-lbl">WhatsApp</span><span class="ct-val">Chat with Rahul</span></div>
+      <span class="ct-arr">↗</span>
+    </a>
+    <a href="tel:+916301059906" class="ct-card">
+      <div class="ct-info"><span class="ct-lbl">Phone</span><span class="ct-val">+91 6301059906</span></div>
+      <span class="ct-arr">↗</span>
+    </a>
+    <a href="mailto:rahul@rahulproperties.in" class="ct-card">
+      <div class="ct-info"><span class="ct-lbl">Email</span><span class="ct-val">rahul@rahulproperties.in</span></div>
+      <span class="ct-arr">↗</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo">Rahul Properties</div>
+  <p>© 2025 · Hyderabad</p>
+  <p>rahulproperties.in</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+var cv = document.getElementById('cv');
+var ctx = cv.getContext('2d');
+cv.width = window.innerWidth; cv.height = window.innerHeight;
+window.addEventListener('resize', function(){ cv.width = window.innerWidth; cv.height = window.innerHeight; });
+
+var pts = [];
+for(var i = 0; i < 50; i++){
+  pts.push({ x: Math.random()*cv.width, y: Math.random()*cv.height, vx:(Math.random()-.5)*.25, vy:(Math.random()-.5)*.25, r:Math.random()*1.2+.3, a:Math.random()*.28+.05 });
+}
+function drawPts(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  for(var i=0;i<pts.length;i++){
+    var p=pts[i]; p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=cv.width; if(p.x>cv.width)p.x=0;
+    if(p.y<0)p.y=cv.height; if(p.y>cv.height)p.y=0;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,92,0,'+p.a+')'; ctx.fill();
+  }
+  for(var i=0;i<pts.length;i++) for(var j=i+1;j<pts.length;j++){
+    var dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
+    if(d<120){ ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.strokeStyle='rgba(255,92,0,'+(0.07*(1-d/120))+')'; ctx.lineWidth=.5; ctx.stroke(); }
+  }
+  requestAnimationFrame(drawPts);
+}
+drawPts();
+
+var num = 0;
+var fill = document.getElementById('ldr-fill');
+var ldrN = document.getElementById('ldr-n');
+var iv = setInterval(function(){
+  num += Math.floor(Math.random()*4)+2;
+  if(num >= 100){ num = 100; clearInterval(iv); setTimeout(startSite, 250); }
+  ldrN.textContent = num;
+  fill.style.width = num + '%';
+}, 40);
+
+function startSite(){
+  gsap.to('#ldr', { yPercent:-100, duration:0.85, ease:'power3.inOut', onComplete:function(){ document.getElementById('ldr').style.display='none'; } });
+  gsap.to('#nav', { opacity:1, duration:0.6, delay:0.3 });
+  gsap.to('#w1', { y:0, duration:1, ease:'power4.out', delay:0.35 });
+  gsap.to('#w2', { y:0, duration:1, ease:'power4.out', delay:0.48 });
+  gsap.to('#w3', { y:0, duration:1, ease:'power4.out', delay:0.61 });
+  gsap.to('#htag', { opacity:1, duration:0.8, delay:0.3 });
+  gsap.to('#hdesc', { opacity:1, duration:0.8, delay:0.75 });
+  gsap.to('#hbtns', { opacity:1, duration:0.8, delay:0.9 });
+  setTimeout(function(){
+    document.querySelectorAll('.hst-n').forEach(function(el){
+      var v=parseInt(el.dataset.v), s=v>=100?'+':v===8?' Yrs':'+';
+      gsap.to({val:0},{val:v,duration:1.8,ease:'power2.out',onUpdate:function(){ el.textContent=Math.round(this.targets()[0].val)+s; }});
+    });
+  }, 700);
+}
+
+window.addEventListener('scroll', function(){
+  document.getElementById('nav').classList[window.scrollY>60?'add':'remove']('scrolled');
+});
+
+gsap.utils.toArray('.svc').forEach(function(el,i){
+  gsap.from(el,{opacity:0,y:50,duration:0.85,ease:'power3.out',delay:i*0.1,scrollTrigger:{trigger:el,start:'top 87%'}});
+});
+gsap.from('.agent-l',{opacity:0,x:-60,duration:1,ease:'power3.out',scrollTrigger:{trigger:'.agent',start:'top 78%'}});
+gsap.from('.agent-r',{opacity:0,x:60,duration:1,ease:'power3.out',delay:0.15,scrollTrigger:{trigger:'.agent',start:'top 78%'}});
+gsap.from('.ct-title',{opacity:0,y:40,duration:0.9,ease:'power3.out',scrollTrigger:{trigger:'.contact',start:'top 82%'}});
+gsap.from('.ct-sub',{opacity:0,y:30,duration:0.8,ease:'power3.out',delay:0.1,scrollTrigger:{trigger:'.contact',start:'top 82%'}});
+gsap.utils.toArray('.ct-card').forEach(function(el,i){
+  gsap.from(el,{opacity:0,x:40,duration:0.8,ease:'power3.out',delay:i*0.12,scrollTrigger:{trigger:'.ct-cards',start:'top 85%'}});
+});
+</script>
+</body>
+</html>
